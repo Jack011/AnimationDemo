@@ -4,8 +4,14 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:src="@drawable/hy"
+        android:src="@drawable/anim_good_class"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+    <ImageView
+        android:src="@drawable/interpolators"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 
 </LinearLayout>

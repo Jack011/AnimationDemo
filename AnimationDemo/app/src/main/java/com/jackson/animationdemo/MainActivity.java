@@ -1,5 +1,6 @@
 package com.jackson.animationdemo;
 
+import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,12 +10,13 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     Button alphaBtn,scaleBtn,translateBtn,rotateBtn,frameBtn,
-            layoutBtn,objectBtn,valueBtn,animSet1,animSet2,animSet3,animSet4;
+            layoutBtn,objectBtn,valueBtn,animSet1,animSet2,animSet3,animSet4,bollFlower;
 
     ImageView imageView;
 
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         animSet2= (Button) findViewById(R.id.animation_set2);
         animSet3= (Button) findViewById(R.id.animation_set3);
         animSet4= (Button) findViewById(R.id.animation_set4);
+        bollFlower= (Button) findViewById(R.id.button_boll_flower);
         imageView= (ImageView) findViewById(R.id.imageView);
 
 
@@ -52,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         animSet2.setOnClickListener(this);
         animSet3.setOnClickListener(this);
         animSet4.setOnClickListener(this);
+        bollFlower.setOnClickListener(this);
         imageView.setOnClickListener(this);
 
     }
@@ -84,7 +88,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //在配置文件中设置延迟startOffset实现动画续播
                 loadAnimation=AnimationUtils.loadAnimation(this,R.anim.set1);
                 imageView.startAnimation(loadAnimation);
-                Toast.makeText(MainActivity.this, "我是set1,我被点击了,哈哈", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.animation_set2:
                 //设置动画监听器,监听第一个动画播完后播放第二个动画
@@ -132,10 +135,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(MainActivity.this,ThirdActivity.class));
                 break;
             case R.id.button_object:
-
+                startActivity(new Intent(MainActivity.this,ObjectAnimatorActivity.class));
                 break;
+            case R.id.button_boll_flower:
+                startActivity(new Intent(MainActivity.this,BollFlowerActivity.class));
+                break;
+            //ObjectAnimator继承自ValueAnimator,不能控制属性,不会响应动画,就是一个数值发生器
             case R.id.button_value:
-
+                ValueAnimator animator=ValueAnimator.ofInt(0,100);
+                animator.setDuration(5000);
+                animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                        //实现计时器的动画效果
+                        Integer value= (Integer) valueAnimator.getAnimatedValue();
+                        valueBtn.setText("value:"+value);
+                    }
+                });
+                animator.start();
+                //ValueAnimator.ofFloat()等等功能强大
                 break;
             case R.id.imageView:
                 Toast.makeText(MainActivity.this, "哈哈,我被点击了,我太高兴了...", Toast.LENGTH_SHORT).show();
@@ -158,7 +176,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //
 //                break;
 //            case R.id.button_translate:
-//
+//                  TranslateAnimation animation=new Translation(0,200,0,0);//fromX,toX,fromY,toY
+    //              animation.setDuration=(1000);
+    //              imageView.startAnimation(animation);
 //                break;
 //            case R.id.button_rotate:
 //

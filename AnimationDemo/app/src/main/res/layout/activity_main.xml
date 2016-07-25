@@ -117,11 +117,13 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="合作动画3"
+        android:text="组合动画3"
         android:id="@+id/animation_set3"
         android:layout_below="@+id/animation_set1"
         android:layout_alignRight="@+id/animation_set1"
-        android:layout_alignEnd="@+id/animation_set1" />
+        android:layout_alignEnd="@+id/animation_set1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -133,6 +135,14 @@
         android:layout_alignParentEnd="true"
         android:layout_alignLeft="@+id/animation_set2"
         android:layout_alignStart="@+id/animation_set2" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="散花小球动画"
+        android:id="@+id/button_boll_flower"
+        android:layout_below="@+id/button_layout"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>
